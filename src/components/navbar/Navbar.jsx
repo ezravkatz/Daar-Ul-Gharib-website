@@ -1,12 +1,25 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "../navbar/navbar.css";
+import { Button } from "../button/Button";
 
 function Navbar() {
   const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
 
   const handleClick = () => setClick(!click);
-
   const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+    if (window.innerWidth <= 960) {
+      setButton(false);
+    } else {
+      setButton(true);
+    }
+  };
+
+  window.addEventListener("resize", showButton);
+
   return (
     <>
       <nav className="navbar">
@@ -74,6 +87,7 @@ function Navbar() {
               </Link>
             </li>
           </ul>
+          {button && <Button buttonStyle="btn--outline"> Test </Button>}
         </div>
       </nav>
     </>
